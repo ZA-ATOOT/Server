@@ -1,14 +1,17 @@
-const Authentication = require('./controllers/authentication');
-const passportServices = require('./services/passport');
-const passport = require('passport');
-
-const requireAuth = passport.authenticate('jwt', { session: false });
-const requireSignin = passport.authenticate('local', { session: false });
+const users = require('./controllers/users');
+const Product = require('./controllers/product');
 
 module.exports = function(app){
-	app.get('/', requireAuth, function(req, res){
-		res.send({ message: 'Super secret code ABC123'})
-	})
-	app.post('/signin', requireSignin, Authentication.signin)
-	app.post('/signup', Authentication.signup)
+	// User
+	app.get('/users', users.getAllUsers)
+	app.post('/signin', users.signin)
+	app.put('/user/:id', users.updateUser)
+	app.put('/userArray/:id', users.updateUserArray)
+
+	// Product
+	app.get('/products', Product.getAllProducts);
+	app.get('/products/:sellerId', Product.getOneProduct);
+	app.put('/products/:id', Product.editOneProduct);
+	app.post('/products',Product.addProduct);
+	app.get('/manyProducts', Product.findManyProducts)
 }
