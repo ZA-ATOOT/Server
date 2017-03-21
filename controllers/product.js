@@ -53,7 +53,7 @@ exports.editOneProduct = function(req, res, next) {
 exports.addProduct = function(req, res, next) {
   var isEmpty = false;
   var emptyParam = []
-  var dataArr = [ /*"categories", "buyerId",*/ "title", "image", "description", "price", "seller", "age", "location"]
+  var dataArr = [ "categories", /*"buyerId",*/ "title", "image", "description", "price", "seller", "age", "city", "address"]
   dataArr.map(function(val, index) {
     if (!req.body[val]) {
       isEmpty = true;
@@ -77,15 +77,13 @@ exports.addProduct = function(req, res, next) {
   })
 }
 
-exports.findManyProducts = function(req, res, next) {
+exports.findProductsFromArrayOfIds = function(req, res, next) {
   Product.find({
     '_id': {
-      $in: [
-        '58b48d1a301ede1204b4752a',
-        '58b48def301ede1204b4752c',
-        '58b48ea9301ede1204b4752d']
+      $in: req.query.arr
     }
   }, function(err, products) {
     res.status(200).send(products)
   });
 }
+

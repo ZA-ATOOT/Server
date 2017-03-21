@@ -11,6 +11,7 @@ const userSchema = new Schema({
 	id: String,
 	profilePicURL: String,
 	like: Array,
+	share: Array,
 	city: String,
 	address: String,
 	isNewUser: {type: Boolean, default: true}
