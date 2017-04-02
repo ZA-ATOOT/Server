@@ -4,11 +4,12 @@ const mongoose = require('mongoose');
 exports.getAllProducts = function(req, res, next) {
   Product.find({}, function(err, products) {
     if (err) {
-      return res.send("error", err)
+      return res.status(422).send(err)
     }
 
     res.json(products)
-  })
+  }).skip(parseInt(req.query.skip))
+    .limit(parseInt(req.query.limit))
 }
 
 exports.getOneProduct = function(req, res, next) {
@@ -16,10 +17,10 @@ exports.getOneProduct = function(req, res, next) {
     sellerId: req.params.sellerId
   }, function(err, products) {
     if (err) {
-      return res.send("error", err)
+      return res.status(422).send(err)
     }
 
-    res.json(products)
+    res.status(200).json(products)
   })
 }
 
@@ -73,7 +74,8 @@ exports.addProduct = function(req, res, next) {
     if (err) {
       return res.send("error", err)
     }
-    res.send(products)
+
+    res.status(200).send(products)
   })
 }
 

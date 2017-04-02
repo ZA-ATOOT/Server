@@ -14,7 +14,7 @@ Search.create(s, function(err, search) {
     if (err) {
       return res.send("error", err)
     }
-    res.send(search)
+    res.status(200).send(search)
   })
 
 }
@@ -57,7 +57,7 @@ Search.find({}, function(err, searchs) {
       return res.send(err)
     }
 
-    res.json(searchs)
+    res.status(200).json(searchs)
   })
 }
 
