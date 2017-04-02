@@ -14,7 +14,8 @@ module.exports = function(app){
 	app.get('/products/:sellerId', Product.getOneProduct);
 	app.put('/products/:id', Product.editOneProduct);
 	app.post('/products',Product.addProduct);
-	app.get('/findProductsFromArrayOfIds', Product.findProductsFromArrayOfIds)
+	app.get('/findProductsFromArrayOfIds', Product.findProductsFromArrayOfIds);
+	app.delete('/removeProduct/:id', Product.findByIdAndRemove)
 	
 	app.get('/mapReduce', Search.mapReduce)
 	app.get('/getAllSearches', Search.getAllSearches)

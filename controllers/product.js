@@ -89,3 +89,11 @@ exports.findProductsFromArrayOfIds = function(req, res, next) {
   });
 }
 
+exports.findByIdAndRemove = function(req, res, next) {
+  Product.findByIdAndRemove(req.params.id, function (err, product) {  
+    if(err){
+      return res.send(err)
+    }
+    res.send(product);
+});
+}
